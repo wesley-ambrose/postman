@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "13011ce5-3f72-4f76-b6ba-0c36d3196c48",
+		"name": "Palo Alto Configuration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "0.0 Add Firewall Rule",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "xpath",
+							"value": "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys3']/rulebase/security/rules/entry[@name='ScienceLogic Admin to DB']",
+							"type": "text"
+						},
+						{
+							"key": "action",
+							"value": "set",
+							"type": "text"
+						},
+						{
+							"key": "element",
+							"value": "<source><member>SUW1-MONITORING2-MGMT_10.77.1.32-28</member></source><destination><member>SUW1-MONITORING2-TUNNEL_10.77.1.16-28</member></destination><service><member>tcp-7706</member></service><source-user><member>any</member></source-user><application><member>any</member></application><negate-source>no</negate-source><negate-destination>no</negate-destination><disabled>no</disabled><log-start>yes</log-start><log-end>yes</log-end><from><member>MONITORING2-MGMT</member></from><to><member>MONITORING2-TUNNEL</member></to><action>allow</action>",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{palo-suw}}config",
+					"host": [
+						"{{palo-suw}}config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "0.1 Add Route",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "xpath",
+							"value": "/config/devices/entry[@name='localhost.localdomain']/network/virtual-router/entry[@name='MGMT-TOOLS']/routing-table/ip/static-route/entry[@name='WesRouteTest']",
+							"type": "text"
+						},
+						{
+							"key": "action",
+							"value": "set",
+							"type": "text"
+						},
+						{
+							"key": "element",
+							"value": "<nexthop>\n<ip-address>10.0.0.1</ip-address>\n</nexthop>\n<bfd>\n<profile>None</profile>\n</bfd>\n<path-monitor>\n<enable>no</enable>\n<failure-condition>any</failure-condition>\n<hold-time>2</hold-time>\n</path-monitor>\n<interface>ae1.311</interface>\n<metric>1000</metric>\n<destination>192.168.0.0/24</destination>\n<route-table>\n<unicast/>\n</route-table>",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{palo-suw}}config",
+					"host": [
+						"{{palo-suw}}config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "0.0 Test Rule",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{palo-suw}}config&action=set&xpath=/config/devices/entry/vsys/entry/rulebase/security/rules/entry=['WesRuleTest']&apikey={{apikey-suw}}&element=<source><member>QTS-VDI-ACCESS-NETS</member></source><destination><member>NETS_QTS</member></destination><service><member>tcp-3389</member></service><source-user><member>any</member></source-user><application><member>any</member></application><option><disable-server-responseinspection>yes</disable-server-responseinspection></option><negate-source>no</negate-source><negate-destination>no</negate-destination><disabled>no</disabled><log-start>yes</log-start><log-end>yes</log-end><to><member>MT-RTR-IC</member></to>",
+					"host": [
+						"{{palo-suw}}config&action=set&xpath="
+					],
+					"path": [
+						"config",
+						"devices",
+						"entry",
+						"vsys",
+						"entry",
+						"rulebase",
+						"security",
+						"rules",
+						"entry=['WesRuleTest']&apikey={{apikey-suw}}&element=<source><member>QTS-VDI-ACCESS-NETS<",
+						"member><",
+						"source><destination><member>NETS_QTS<",
+						"member><",
+						"destination><service><member>tcp-3389<",
+						"member><",
+						"service><source-user><member>any<",
+						"member><",
+						"source-user><application><member>any<",
+						"member><",
+						"application><option><disable-server-responseinspection>yes<",
+						"disable-server-responseinspection><",
+						"option><negate-source>no<",
+						"negate-source><negate-destination>no<",
+						"negate-destination><disabled>no<",
+						"disabled><log-start>yes<",
+						"log-start><log-end>yes<",
+						"log-end><to><member>MT-RTR-IC<",
+						"member><",
+						"to>"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "0.2 Update Service Group",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "xpath",
+							"value": "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys3']/service-group/entry[@name='SVC-MON-TUNNEL']/members",
+							"type": "text"
+						},
+						{
+							"key": "action",
+							"value": "edit",
+							"type": "text"
+						},
+						{
+							"key": "element",
+							"value": "<members><member>tcp-range-48000-48003</member><member>tcp-7707</member></members>",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{palo-suw}}config",
+					"host": [
+						"{{palo-suw}}config"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "wesley.ambrose",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1521da4f-3a68-48f5-8828-c896ac209c85",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "207ae444-0ca6-4894-b10a-9e3ad79ef60a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

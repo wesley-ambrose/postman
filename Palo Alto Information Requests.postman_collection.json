@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "8e594c26-0320-4000-b29a-e29405a1b490",
+		"name": "Palo Alto Information Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create API Key",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{palo-suw}}keygen&user=wesley.ambrose&password=password",
+					"host": [
+						"{{palo-suw}}keygen&user=wesley",
+						"ambrose&password=password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.0 Get Complete Firewall Config",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{palo-suw}}config&action=get&xpath=/config/devices&key={{apikey-suw}}",
+					"host": [
+						"{{palo-suw}}config&action=get&xpath="
+					],
+					"path": [
+						"config",
+						"devices&key={{apikey-suw}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.1 Get Firewall Rules Only",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{palo-suw}}config&action=get&xpath=/config/devices/entry/vsys/entry/rulebase/security&key={{apikey-suw}}",
+					"host": [
+						"{{palo-suw}}config&action=get&xpath="
+					],
+					"path": [
+						"config",
+						"devices",
+						"entry",
+						"vsys",
+						"entry",
+						"rulebase",
+						"security&key={{apikey-suw}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "wesley.ambrose",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a639e346-4fed-4bae-835a-dfde466b3324",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b685edb3-fe2b-4cec-82fc-cd89ee962f21",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
